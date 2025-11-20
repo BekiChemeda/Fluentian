@@ -1,0 +1,480 @@
+<!-- Chosen Palette: Brand Purple (Primary: #8b54ff, Neutrals: White/Grays) -->
+<!-- Application Structure Plan: A single-page, top-down narrative landing page. It starts with the core value proposition (Hero), explains the "why" (About/Vision), details the "how" (Features/Roadmap), answers questions (FAQ), and funnels the user to the primary call-to-action (Survey). This structure is chosen to build trust and excitement, guiding the user logically from "What is this?" to "I'm interested, how can I help?". -->
+<!-- Visualization & Content Choices: [Report Info: Project Roadmap -> Goal: Show users the development plan -> Viz/Method: An HTML/Tailwind-based vertical timeline/stepper diagram (no SVG) -> Interaction: None, static info -> Justification: Visually breaks up text and clearly shows progress.] [Report Info: FAQ -> Goal: Answer common user questions -> Viz/Method: HTML/Tailwind accordion list -> Interaction: JavaScript-powered click-to-open/close, only one open at a time -> Justification: Saves space and provides a clean, interactive way to handle questions.] [Report Info: Survey Request -> Goal: Collect user feedback -> Viz/Method: Embedded Google Form iframe -> Interaction: Form filling -> Justification: Meets primary business goal of the landing page.] -->
+<!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluentian - Learn French with Local Support</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            DEFAULT: '#8b54ff',
+                            dark: '#6d3bd1',
+                            light: '#a67dff',
+                            50: '#f4efff',
+                            900: '#4c1d95'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        handwriting: ['"Caveat"', 'cursive']
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <style>
+        .hero-pattern {
+            background-color: #ffffff;
+            background-image: radial-gradient(#8b54ff 0.5px, transparent 0.5px), radial-gradient(#8b54ff 0.5px, #ffffff 0.5px);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            opacity: 0.05;
+        }
+        .accordion-content {
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out, padding 0.3s ease;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        .accordion-content.active {
+            opacity: 1;
+        }
+        .accordion-btn.active .fa-chevron-down {
+            transform: rotate(180deg);
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 antialiased">
+
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-sm shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0 flex items-center gap-3">
+                    <img src="fluentian logo1.jpg" alt="Fluentian Logo" class="h-12 w-auto object-contain rounded-lg shadow-sm"
+                         onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+                    <div class_name="h-12 w-12 bg-brand-50 rounded-lg flex items-center justify-center font-bold text-brand text-2xl hidden">F</div>
+                    <span class="font-bold text-2xl tracking-tight text-gray-900 hidden sm:block">Fluentian</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="text-gray-600 hover:text-brand transition font-medium">About Us</a>
+                    <a href="#features" class="text-gray-600 hover:text-brand transition font-medium">Features</a>
+                    <a href="#faq" class="text-gray-600 hover:text-brand transition font-medium">FAQ</a>
+                    <a href="https://t.me/FluentianET" target="_blank" class="text-blue-500 hover:text-blue-600 transition font-medium">
+                        <i class="fab fa-telegram text-lg mr-1"></i> Telegram
+                    </a>
+                    <a href="#survey" class="px-6 py-2.5 rounded-full bg-brand text-white font-medium hover:bg-brand-dark transition shadow-lg shadow-brand/30">
+                        Take Survey
+                    </a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="text-gray-600 hover:text-brand focus:outline-none p-2">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t absolute w-full shadow-lg">
+            <div class="px-4 pt-2 pb-6 space-y-3">
+                <a href="#about" class="block px-3 py-2 text-gray-600 hover:text-brand hover:bg-brand-50 rounded-md">About Us</a>
+                <a href="#features" class="block px-3 py-2 text-gray-600 hover:text-brand hover:bg-brand-50 rounded-md">Features</a>
+                <a href="#faq" class="block px-3 py-2 text-gray-600 hover:text-brand hover:bg-brand-50 rounded-md">FAQ</a>
+                <a href="https://t.me/FluentianET" class="block px-3 py-2 text-blue-500 font-medium">Join Telegram</a>
+                <a href="#survey" class="block px-3 py-2 text-brand font-bold">Take Survey</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="relative pt-32 pb-20 lg:pt-44 lg:pb-28 overflow-hidden">
+        <div class="absolute inset-0 hero-pattern -z-10"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            
+            <div class="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full bg-brand-50 border border-brand-light/30 text-brand font-semibold text-sm tracking-wide animate-fade-in-up">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-brand"></span>
+                </span>
+                <span>The Future of Learning • Coming Soon</span>
+            </div>
+
+            <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight animate-fade-in-up" style="animation-delay: 0.1s;">
+                Master French with <br>
+                <span class="text-brand">English & Local Languages</span>
+            </h1>
+            
+            <p class="text-lg md:text-xl text-gray-600 mb-6 max-w-3xl mx-auto leading-relaxed animate-fade-in-up" style="animation-delay: 0.2s;">
+                Learn primarily through English, but with full support in <strong>Amharic</strong> and <strong>other local languages</strong> (upcoming). We remove the language barrier so you can focus on fluency.
+            </p>
+            
+            <p class="text-md text-gray-500 font-medium mb-10 animate-fade-in-up" style="animation-delay: 0.3s;">
+                ✨ The full application is coming soon. Join our community now!
+            </p>
+
+            <div class="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in-up" style="animation-delay: 0.4s;">
+                <a href="#survey" class="px-8 py-4 rounded-full bg-brand text-white font-bold text-lg shadow-xl shadow-brand/30 hover:bg-brand-dark transform hover:-translate-y-1 transition duration-300">
+                    Help Us Build It
+                </a>
+                <a href="https://t.me/FluentianET" target="_blank" class="px-8 py-4 rounded-full bg-[#229ED9] text-white font-bold text-lg shadow-xl shadow-blue-400/30 hover:bg-[#1c86b8] transform hover:-translate-y-1 transition duration-300 flex items-center justify-center gap-2">
+                    <i class="fab fa-telegram-plane"></i> @FluentianET
+                </a>
+            </div>
+            
+            <div class="mt-12 flex flex-wrap justify-center items-center gap-3 text-sm font-medium text-gray-500 opacity-80 animate-fade-in-up" style="animation-delay: 0.5s;">
+                <span class="px-3 py-1 bg-gray-100 rounded-full border">🇬🇧 English</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full border">🇫🇷 Français</span>
+                <span class="text-gray-300">|</span>
+                <span class="px-3 py-1 bg-brand-50 text-brand rounded-full border border-brand/10">🇪🇹 Amharic</span>
+                <span class="px-3 py-1 bg-white text-gray-400 rounded-full border border-dashed border-gray-300">More Upcoming...</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Vision</h2>
+                <p class="text-lg text-gray-600">This is our plan to build a new way to learn, together.</p>
+                <div class="w-24 h-1 bg-brand mx-auto rounded-full mt-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Breaking the Barrier</h3>
+                        <p class="text-gray-600 leading-relaxed">
+                            For too long, learning French has required a high level of English proficiency. This creates an unnecessary gatekeeper for millions of Ethiopian students. <strong>Fluentian</strong> was born to dismantle this barrier. We believe your potential shouldn't be limited by the languages you speak, but expanded by them.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">The Fluentian Approach</h3>
+                        <p class="text-gray-600 leading-relaxed">
+                            Our name reflects our core mission: creating true <strong>Fluency</strong> for everyone. We don't just teach vocabulary; we build bridges. By explaining complex French grammar using the intuitive logic of <strong>Amharic</strong> (and other upcoming local languages), we make learning faster, stickier, and far more accessible.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Rooted in Culture</h3>
+                        <p class="text-gray-600 leading-relaxed">
+                            Language is culture. Instead of generic European examples, Fluentian immerses you in scenarios that matter to you—Ethiopian markets, festivals, and family gatherings—translated into the francophone world.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 rounded-3xl p-8 border border-gray-100 shadow-sm lg:sticky lg:top-28">
+                    <h4 class="font-bold text-lg text-gray-900 mb-6">Project Roadmap</h4>
+                    
+                    <div class="space-y-6 relative before:absolute before:inset-0 before:ml-3.5 before:-z-10 before:h-full before:w-0.5 before:bg-gray-200">
+                        
+                        <div class="relative flex items-start">
+                            <span class="h-7 w-7 flex items-center justify-center rounded-full bg-brand text-white text-xs font-bold ring-4 ring-white shadow-sm">1</span>
+                            <div class="ml-4">
+                                <h5 class="text-gray-900 font-bold">Survey</h5>
+                                <p class="text-xs text-brand font-semibold mt-0.5 animate-pulse">Currently doing</p>
+                            </div>
+                        </div>
+
+                        <div class="relative flex items-center">
+                            <span class="h-7 w-7 flex items-center justify-center rounded-full bg-white border-2 border-gray-300 text-gray-500 text-xs font-bold ring-4 ring-white">2</span>
+                            <div class="ml-4">
+                                <h5 class="text-gray-600 font-medium">Create Online Learning Community</h5>
+                            </div>
+                        </div>
+
+                        <div class="relative flex items-center">
+                            <span class="h-7 w-7 flex items-center justify-center rounded-full bg-white border-2 border-gray-300 text-gray-500 text-xs font-bold ring-4 ring-white">3</span>
+                            <div class="ml-4">
+                                <h5 class="text-gray-600 font-medium">Mobile App Development</h5>
+                            </div>
+                        </div>
+
+                        <div class="relative flex items-center">
+                            <span class="h-7 w-7 flex items-center justify-center rounded-full bg-white border-2 border-gray-300 text-gray-500 text-xs font-bold ring-4 ring-white">4</span>
+                            <div class="ml-4">
+                                <h5 class="text-gray-600 font-medium">Beta Testing</h5>
+                            </div>
+                        </div>
+
+                        <div class="relative flex items-center">
+                            <span class="h-7 w-7 flex items-center justify-center rounded-full bg-white border-2 border-gray-300 text-gray-500 text-xs font-bold ring-4 ring-white">5</span>
+                            <div class="ml-4">
+                                <h5 class="text-gray-600 font-medium">Asking for Feedback</h5>
+                            </div>
+                        </div>
+
+                        <div class="relative flex items-center">
+                            <span class="h-7 w-7 flex items-center justify-center rounded-full bg-white border-2 border-gray-300 text-gray-500 text-xs font-bold ring-4 ring-white">6</span>
+                            <div class="ml-4">
+                                <h5 class="text-gray-600 font-medium">Final Release</h5>
+                            </div>
+                        </div>
+
+                        <div class="relative flex items-center">
+                            <span class="h-7 w-7 flex items-center justify-center rounded-full bg-white border-2 border-gray-300 text-gray-500 text-xs font-bold ring-4 ring-white">7</span>
+                            <div class="ml-4">
+                                <h5 class="text-gray-600 font-medium">Expansion & New Languages</h5>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    <div class="mt-8 pt-6 border-t border-gray-200 text-center">
+                         <p class="font-handwriting text-brand-dark font-bold text-xl">
+                             Being built with love and unity <i class="fas fa-heart text-red-500 ml-1"></i>
+                         </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="py-20 bg-brand-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-900">Features Built for Ethiopia</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 border border-gray-100">
+                    <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center text-xl mb-4">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Gamified Learning</h3>
+                    <p class="text-gray-600 text-sm">
+                        Interactive lessons with streaks, leaderboards, and rewards to keep you addicted to learning.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 border border-gray-100">
+                    <div class="w-12 h-12 rounded-xl bg-purple-100 text-brand flex items-center justify-center text-xl mb-4">
+                        <i class="fas fa-microphone-lines"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Speech Tech</h3>
+                    <p class="text-gray-600 text-sm">
+                        Advanced Text-to-Speech and Speech-to-Text features to ensure your pronunciation is perfect.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 border border-gray-100">
+                    <div class="w-12 h-12 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center text-xl mb-4">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Cultural Exchange</h3>
+                    <p class="text-gray-600 text-sm">
+                        Connect with others. Learn French using contexts like our local holidays and traditions.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 border border-gray-100">
+                    <div class="w-12 h-12 rounded-xl bg-green-100 text-green-600 flex items-center justify-center text-xl mb-4">
+                        <i class="fas fa-wifi"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Offline Access</h3>
+                    <p class="text-gray-600 text-sm">
+                        Download courses. Low internet connection? No problem. Learn anytime, anywhere.
+                    </D>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="py-20 bg-white">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900">Frequently Asked Questions</h2>
+                <p class="text-gray-600 mt-2">Everything you need to know about Fluentian.</p>
+            </div>
+
+            <div class="space-y-4" id="accordion-container">
+                
+                <div class="border border-gray-200 rounded-xl overflow-hidden">
+                    <button class="accordion-btn w-full flex justify-between items-center p-5 bg-white hover:bg-gray-50 transition focus:outline-none text-left">
+                        <span class="font-semibold text-gray-800">Is Fluentian free to use?</span>
+                        <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content bg-gray-50">
+                        <div class="p-5 pt-0 text-gray-600">
+                            We offer a comprehensive <strong>mostly free version</strong>. Our goal is accessibility, so the core learning experience is available at no cost, with premium options potentially available in the future for advanced features.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border border-gray-200 rounded-xl overflow-hidden">
+                    <button class="accordion-btn w-full flex justify-between items-center p-5 bg-white hover:bg-gray-50 transition focus:outline-none text-left">
+                        <span class="font-semibold text-gray-800">Do I need to know English to use it?</span>
+                        <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content bg-gray-50">
+                        <div class="p-5 pt-0 text-gray-600">
+                            Not necessarily. While English is used, our unique selling point is that we provide explanations and grammar rules directly in <strong>Amharic</strong> (with other local languages coming soon). You can rely on your mother tongue to learn French effectively.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border border-gray-200 rounded-xl overflow-hidden">
+                    <button class="accordion-btn w-full flex justify-between items-center p-5 bg-white hover:bg-gray-50 transition focus:outline-none text-left">
+                        <span class="font-semibold text-gray-800">Can I learn offline?</span>
+                        <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content bg-gray-50">
+                        <div class="p-5 pt-0 text-gray-600">
+                            Absolutely. We understand internet connectivity can be challenging. We allow you to download lessons and content so you can continue your progress without an active internet connection.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border border-gray-200 rounded-xl overflow-hidden">
+                    <button class="accordion-btn w-full flex justify-between items-center p-5 bg-white hover:bg-gray-50 transition focus:outline-none text-left">
+                        <span class="font-semibold text-gray-800">Can I contribute as a teacher?</span>
+                        <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content bg-gray-50">
+                        <div class="p-5 pt-0 text-gray-600">
+                            Yes! We plan to allow native speakers with certification to prepare courses on the site. It's also an open-source platform, so developers from Ethiopia and France are welcome to contribute code and features.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="survey" class="py-24 bg-brand-900 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+             <svg width="100%" height="100%">
+                <pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                    <circle cx="2" cy="2" r="2" class="text-white" fill="currentColor" />
+                </pattern>
+                <rect width="100%" height="100%" fill="url(#dots)" />
+            </svg>
+        </div>
+
+        <div class="max-w-5xl mx-auto px-4 relative z-10">
+            <div class="text-center mb-10">
+                <span class="bg-brand text-white px-4 py-1 rounded-full text-sm font-medium mb-4 inline-block border border-white/20 shadow-lg">We need your feedback</span>
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-4">Help Shape Fluentian</h2>
+                <p class="text-brand-50 text-lg max-w-2xl mx-auto">
+                    Please fill out the form below. Your input helps us build the features you actually need.
+                </p>
+            </div>
+            
+            <div class="bg-white rounded-2xl shadow-2xl overflow-hidden mx-auto max-w-[750px]">
+                <div class="relative w-full flex justify-center bg-gray-50">
+                    <iframe 
+                        src="https://docs.google.com/forms/d/e/1FAIpQLSej0ZgiBRBe9zz1GsF_PgF2OjIsqwiD5MAQRTSBok3aqeL6pQ/viewform?embedded=true" 
+                        width="700" 
+                        height="800" 
+                        frameborder="0" 
+                        marginheight="0" 
+                        marginwidth="0"
+                        class="w-full max-w-full min-h-[500px] md:min-h-[600px]"
+                        title="Fluentian Survey">
+                        Loading…
+                    </iframe>
+                </div>
+                
+                <div class="bg-gray-100 p-4 text-center border-t">
+                    <p class="text-sm text-gray-600 mb-2">Having trouble viewing the form?</p>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSej0ZgiBRBe9zz1GsF_PgF2OjIsqwiD5MAQRTSBok3aqeL6pQ/viewform" target="_blank" class="inline-flex items-center justify-center px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand">
+                        Open in Google Forms <i class="fas fa-external-link-alt ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-white py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0 text-center md:text-left">
+                    <div class="flex items-center justify-center md:justify-start gap-3 mb-2">
+                         <img src="fluentian logo1.jpg" alt="Logo" class="h-8 w-auto rounded bg-white/10"
+                              onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+                         <div class_name="h-8 w-8 bg-brand-50 rounded-lg flex items-center justify-center font-bold text-brand text-lg hidden">F</div>
+                        <span class="text-xl font-bold">Fluentian</span>
+                    </div>
+                    <p class="text-gray-400 text-sm max-w-xs">Learning French through English, Amharic, and Local Languages.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://t.me/FluentianET" target="_blank" class="text-gray-400 hover:text-[#229ED9] transition transform hover:scale-110"><i class="fab fa-telegram text-2xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition transform hover:scale-110"><i class="fab fa-twitter text-2xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-blue-600 transition transform hover:scale-110"><i class="fab fa-linkedin text-2xl"></i></a>
+                </div>
+            </div>
+            <div class="mt-8 text-center md:text-left text-gray-500 text-sm border-t border-gray-800 pt-8">
+                &copy; 2025 Fluentian Learning Platform. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.accordion-btn');
+            
+            buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const isActive = button.classList.contains('active');
+                    
+                    document.querySelectorAll('.accordion-btn').forEach(otherBtn => {
+                        if (otherBtn !== button) {
+                            otherBtn.classList.remove('active');
+                            otherBtn.nextElementSibling.style.maxHeight = null;
+                            otherBtn.nextElementSibling.classList.remove('active');
+                            otherBtn.nextElementSibling.style.padding = "0 20px";
+                        }
+                    });
+
+                    button.classList.toggle('active');
+                    
+                    if (!isActive) {
+                        content.classList.add('active');
+                        content.style.maxHeight = content.scrollHeight + "px";
+                        content.style.padding = "0 20px 20px 20px";
+                    } else {
+                        content.classList.remove('active');
+                        content.style.maxHeight = null;
+                        content.style.padding = "0 20px";
+                    }
+                });
+            });
+            
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId.length > 1) {
+                        e.preventDefault();
+                        const targetElement = document.querySelector(targetId);
+                        if(targetElement) {
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                    
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if(mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
