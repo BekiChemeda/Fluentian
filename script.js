@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    /* -------------------------------------------------------------
-       1. Mobile Menu Toggle
-       ------------------------------------------------------------- */
+    // Mobile Menu
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const closeMenuBtn = document.querySelector('.close-menu-btn');
     const mobileMenu = document.querySelector('.mobile-menu');
@@ -16,14 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if(mobileMenuBtn) mobileMenuBtn.addEventListener('click', toggleMenu);
     if(closeMenuBtn) closeMenuBtn.addEventListener('click', toggleMenu);
 
-    // Close menu when clicking a link
-    mobileLinks.forEach(link => {
-        link.addEventListener('click', toggleMenu);
-    });
+    mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
 
-    /* -------------------------------------------------------------
-       2. Navbar Scroll Effect
-       ------------------------------------------------------------- */
+    // Navbar Scroll Effect
     const navbar = document.querySelector('.navbar');
     
     window.addEventListener('scroll', () => {
@@ -34,16 +27,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    /* -------------------------------------------------------------
-       3. Scroll Reveal Animation
-       ------------------------------------------------------------- */
+    // Scroll Animations
     const revealElements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right, .reveal-scale');
 
     const revealObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('reveal-active');
-                observer.unobserve(entry.target); // Only animate once
+                observer.unobserve(entry.target);
             }
         });
     }, {
@@ -53,14 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     revealElements.forEach(el => revealObserver.observe(el));
 
-    /* -------------------------------------------------------------
-       4. Countdown Timer (Removed)
-       ------------------------------------------------------------- */
-    // Code removed as per new design requirements
-
-    /* -------------------------------------------------------------
-       5. Dark Mode Toggle
-       ------------------------------------------------------------- */
+    // Dark Mode
     const themeToggle = document.getElementById('theme-toggle');
     const themeIcon = themeToggle.querySelector('i');
     
@@ -86,82 +70,71 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    /* -------------------------------------------------------------
-       7. Form Submission Handling (Google Sheets) & Real-time Count
-       ------------------------------------------------------------- */
-    const scriptURL = 'YOUR_GOOGLE_SCRIPT_URL_HERE'; // User needs to replace this
-    
-    // Select both the hero form (by ID) and the launch form (by name)
+    // Form Submission & Google Sheets
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwIrh9zPdgZ3T_9EVcOEikkuWH6hTAs6gPcplgxV0MQNo53i5BDu8dHaxgLlPFNCBQM/exec';
     const forms = document.querySelectorAll("#hero-waitlist, form[name='submit-to-google-sheet']"); 
 
+    // Modals
+    const successModal = document.getElementById('success-modal');
+    const closeSuccessBtn = successModal ? successModal.querySelector('.close-modal') : null;
+    const closeSuccessActionBtn = successModal ? successModal.querySelector('.close-modal-btn') : null;
 
+    const errorModal = document.getElementById('error-modal');
+    const closeErrorBtn = errorModal ? errorModal.querySelector('.close-modal') : null;
+    const closeErrorActionBtn = errorModal ? errorModal.querySelector('.close-modal-btn') : null;
 
-    // Modal Elements
-    const modal = document.getElementById('success-modal');
-    const closeModal = document.querySelector('.close-modal');
-    const closeModalBtn = document.querySelector('.close-modal-btn');
+    function openSuccessModal() { if(successModal) successModal.classList.add('active'); }
+    function closeSuccess() { if(successModal) successModal.classList.remove('active'); }
+    function openErrorModal() { if(errorModal) errorModal.classList.add('active'); }
+    function closeError() { if(errorModal) errorModal.classList.remove('active'); }
 
-    function openModal() {
-        if(modal) modal.classList.add('active');
-    }
+    // Modal Listeners
+    if(closeSuccessBtn) closeSuccessBtn.addEventListener('click', closeSuccess);
+    if(closeSuccessActionBtn) closeSuccessActionBtn.addEventListener('click', closeSuccess);
+    if(closeErrorBtn) closeErrorBtn.addEventListener('click', closeError);
+    if(closeErrorActionBtn) closeErrorActionBtn.addEventListener('click', closeError);
 
-    function removeModal() {
-        if(modal) modal.classList.remove('active');
-    }
-
-    if(closeModal) closeModal.addEventListener('click', removeModal);
-    if(closeModalBtn) closeModalBtn.addEventListener('click', removeModal);
     window.addEventListener('click', (e) => {
-        if(e.target === modal) removeModal();
+        if(e.target === successModal) closeSuccess();
+        if(e.target === errorModal) closeError();
     });
-    
-    // Base count starting from 10
-    // The visual counter text was changed to generic text, so we no longer update a number.
-    // However, if we want to keep the logic for future use or to track internally:
-    let currentCount = 10; 
-    
-    // Function to update the displayed count - DISABLED as element has no ID now or is text only
-    function updateCountDisplay() {
-        if(countDisplay) {
-            // countDisplay.innerText = currentCount.toLocaleString(); // Disabled per user request
-        }
-    }
-    
-    // Initialize count
-    // updateCountDisplay();
 
     if (forms) {
         forms.forEach(form => {
             form.addEventListener('submit', e => {
                 e.preventDefault();
                 
-                // Simulate success for demo purposes if URL not set
-                if(scriptURL === 'YOUR_GOOGLE_SCRIPT_URL_HERE') {
-                    openModal();
-                    form.reset();
-                    // currentCount++; // Increment count on signup
-                    // updateCountDisplay();
-                    return;
-                }
+                const originalBtnText = form.querySelector('button').innerHTML;
+                form.querySelector('button').innerHTML = 'Sending...';
 
                 fetch(scriptURL, { method: 'POST', body: new FormData(form)})
                     .then(response => {
-                        openModal();
+                        if (!response.ok) throw new Error('Network error');
+                        
+                        const contentType = response.headers.get("content-type");
+                        if (contentType && contentType.indexOf("application/json") !== -1) {
+                            return response.json().then(data => {
+                                if (data.result === 'error') throw new Error(data.error);
+                                return data;
+                            });
+                        }
+                        return response.text();
+                    })
+                    .then(() => {
+                        openSuccessModal();
                         form.reset();
-                        // currentCount++; // Increment count on signup
-                        // updateCountDisplay();
+                        form.querySelector('button').innerHTML = originalBtnText;
                     })
                     .catch(error => {
-                        console.error('Error!', error.message);
-                        alert("There was an issue joining the waitlist. Please try again.");
+                        console.error('Submission failed', error.message);
+                        openErrorModal();
+                        form.querySelector('button').innerHTML = originalBtnText;
                     });
             });
         });
     }
 
-    /* -------------------------------------------------------------
-       8. FAQ Accordion
-       ------------------------------------------------------------- */
+    // FAQ Accordion
     const accordions = document.querySelectorAll('.accordion-header');
     accordions.forEach(acc => {
         acc.addEventListener('click', () => {

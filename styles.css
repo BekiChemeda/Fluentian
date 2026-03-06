@@ -1610,6 +1610,10 @@ footer {
     margin-bottom: 20px;
 }
 
+.modal-icon.error {
+    color: #ef4444;
+}
+
 .modal-content h3 {
     font-size: 1.5rem;
     margin-bottom: 10px;
