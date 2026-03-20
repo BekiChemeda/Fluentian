@@ -115,6 +115,7 @@ ul {
     z-index: 1000;
     padding: 20px 0;
     transition: var(--transition);
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     background: rgba(255, 255, 255, 0.1);
 }

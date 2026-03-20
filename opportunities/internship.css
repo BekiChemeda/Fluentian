@@ -1,0 +1,895 @@
+/* Internship Page Specific Overrides & New Styles */
+        :root {
+            --bg-body: #F9FAFB; /* Professional off-white */
+            --text-main: #111827; /* Dark slate */
+            --text-muted: #6B7280; /* Muted secondary text */
+            --accent: #3B82F6; /* Bright Blue */
+            --accent-light: rgba(59, 130, 246, 0.1);
+            --card-surface: #ffffff;
+            --border-color: #E5E7EB;
+            --success: #10B981; /* Green for completion */
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: #1F2937; /* Dark slate gray for headings */
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Simplified Navbar for this page */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar .nav-links a:not(.logo) {
+            display: none; 
+        }
+
+        /* Standard Navbar Layout */
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: row; 
+            width: 100%;
+        }
+
+        #theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            padding: 8px;
+        }
+
+        /* FAQ Accordion Styles */
+        .faq-section {
+            padding: 60px 0;
+            background-color: var(--bg-body);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--card-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            text-align: left;
+            padding: 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-main);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: color 0.2s;
+        }
+
+        .faq-question:hover {
+            color: var(--accent);
+        }
+
+        .faq-toggle-icon {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+            color: var(--text-muted);
+        }
+
+        .faq-item.active .faq-toggle-icon {
+            transform: rotate(45deg);
+            color: var(--accent);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background-color: rgba(249, 250, 251, 0.5);
+        }
+
+        .faq-answer-content {
+            padding: 0 20px 20px 20px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .faq-answer-content ul {
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+
+        .faq-answer-content li {
+            margin-bottom: 5px;
+        }
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+        }
+
+        #theme-toggle:hover {
+            color: var(--accent);
+            background: var(--accent-light);
+        }
+        
+        .logo-text {
+            color: #1F2937;
+            font-weight: 700;
+        }
+
+        /* Hero Section */
+        .hero-internship {
+            padding: 140px 0 80px;
+            text-align: center;
+            background: var(--bg-body);
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--accent-light);
+            color: var(--accent);
+            padding: 8px 20px;
+            border-radius: 6px; /* Modern slightly rounded edge */
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 24px;
+            line-height: 1.1;
+            letter-spacing: -1px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 760px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        /* Program Details Grid */
+        .program-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .detail-card {
+            background: var(--card-surface);
+            padding: 30px;
+            border-radius: 8px; /* Professional border radius */
+            border: 1px solid var(--border-color);
+            text-align: left;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* Subtle shadow */
+        }
+        
+        .detail-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .detail-card h3 i {
+            color: var(--accent);
+        }
+
+        .detail-card p {
+            font-size: 0.95rem;
+            margin: 0;
+            color: var(--text-muted);
+        }
+
+        /* Roles Section */
+        .roles-section {
+            padding: 100px 0;
+            background: var(--card-surface);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.125rem;
+        }
+
+        .role-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .role-card {
+            background: var(--bg-body); /* Slightly off-white inside the white section */
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 32px;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .role-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-color: var(--accent);
+        }
+
+        .role-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .role-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--accent-light);
+            color: var(--accent);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .role-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .role-stack {
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 600;
+            background: white;
+            border: 1px solid var(--accent-light);
+            padding: 4px 10px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .role-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .role-list li {
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 14px;
+            color: var(--text-main); /* Darker for readability */
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .role-list li::before {
+            content: "\f00c";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: var(--success); /* Green checks */
+            font-size: 0.85rem;
+        }
+
+        /* Process / Timeline Section */
+        .process-section {
+            padding: 100px 0;
+            background: var(--bg-body);
+        }
+
+        .timeline-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 800px;
+            margin: 50px auto 0;
+        }
+
+        .timeline-step {
+            position: relative;
+            padding: 24px 30px;
+            background: var(--card-surface);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .step-info {
+            flex-grow: 1;
+        }
+
+        .step-badge {
+            display: flex;
+            background: var(--accent);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .timeline-step h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .timeline-step p {
+            color: var(--text-muted);
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        .step-date {
+            display: inline-block;
+            background: var(--accent-light);
+            color: var(--accent);
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+
+        /* Calendar Styles */
+        .schedule-section {
+            padding: 80px 0;
+            background: var(--card-surface);
+        }
+
+        .calendar-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .calendar-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .legend-color {
+            width: 14px;
+            height: 14px;
+            border-radius: 4px;
+        }
+
+        .month-container {
+            background: var(--card-surface);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .month-header {
+            background: var(--bg-body);
+            padding: 15px 20px;
+            text-align: left;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--text-main);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .calendar-nav-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            width: 32px;
+            height: 32px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: all 0.2s;
+        }
+
+        .calendar-nav-btn:hover {
+            background: var(--border-color);
+            color: var(--accent);
+        }
+        
+        .calendar-nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .days-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 1px;
+            background: var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .day-header {
+            padding: 10px 5px;
+            text-align: center;
+            background: var(--card-surface);
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .day-cell {
+            background: var(--card-surface);
+            min-height: 90px;
+            padding: 8px;
+            position: relative;
+        }
+
+        .day-cell.other-month {
+            background: var(--bg-body);
+            color: var(--text-muted);
+        }
+
+        .date-num {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            color: var(--text-main);
+        }
+
+        .day-cell.today .date-num {
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+        }
+
+        .today-label {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            font-size: 0.65rem;
+            color: var(--accent);
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .event-badge {
+            display: block;
+            font-size: 0.75rem;
+            padding: 4px 6px;
+            border-radius: 4px;
+            margin-bottom: 4px;
+            color: white;
+            font-weight: 500;
+            line-height: 1.2;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.1);
+        }
+
+        /* Event Colors - Match Design System */
+        .evt-app { background: var(--accent); }
+        .evt-div { background: #6B7280; }
+        .evt-work { background: var(--accent); }
+        .evt-sub { background: #10B981; }
+        .evt-rev { background: #1F2937; }
+
+        @media (max-width: 768px) {
+            .day-cell { min-height: 70px; padding: 4px; }
+            .event-badge { font-size: 0.65rem; padding: 2px 4px; font-weight: normal; }
+            .date-num { width: 24px; height: 24px; font-size: 0.8rem; }
+            .today-label { display: none; }
+        }
+
+        /* Buttons */
+        .btn-apply {
+            background: var(--accent);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: background 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            border: none;
+        }
+
+        .btn-apply:hover {
+            background: #2563EB; /* Darker blue on hover */
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 6px;
+            font-weight: 600;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: #2563EB;
+        }
+
+        /* Call to Action Section */
+        .cta-section {
+            padding: 100px 0;
+            text-align: center;
+            background: #1F2937; /* Dark Slate Gray */
+            color: white;
+            position: relative;
+        }
+        
+        .cta-content h2 {
+            color: white;
+        }
+
+        .disclaimer {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #9CA3AF;
+        }
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 16px;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.125rem;
+        }
+
+        .role-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .role-card {
+            background: var(--card-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .role-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: var(--accent);
+        }
+
+        .role-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .role-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--accent-light);
+            color: var(--accent);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .role-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #1F2937;
+        }
+
+        .role-stack {
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 600;
+            background: #f3f4f6;
+            padding: 6px 14px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .role-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .role-list li {
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 14px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .role-list li::before {
+            content: "\f00c"; /* FontAwesome check */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 3px;
+            color: var(--accent);
+            font-size: 0.85rem;
+        }
+
+        /* Timeline & Process */
+        .process-section {
+            padding: 100px 0;
+            background: var(--bg-body);
+        }
+
+        .timeline-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .timeline-step {
+            position: relative;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        .step-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 32px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .timeline-step h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #1F2937;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 120px 0;
+            text-align: center;
+            background: var(--bg-body);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: radial-gradient(#374151 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.1;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .btn-apply {
+            background: var(--accent);
+            color: white;
+            padding: 18px 50px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .btn-apply:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.5);
+        }
+
+        .disclaimer {
+            margin-top: 40px;
+            font-size: 0.9rem;
+            color: #9ca3af;
+            font-style: italic;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .section-header h2 { font-size: 2rem; }
+        }
+
+        /* Dark Mode Overrides */
+        body.dark-mode {
+            --bg-body: #111827;
+            --text-main: #F9FAFB;
+            --text-muted: #9CA3AF;
+            --card-surface: #1F2937;
+            --border-color: #374151;
+            --accent-light: rgba(59, 130, 246, 0.15);
+        }
+
+        body.dark-mode #theme-toggle {
+            color: var(--text-main);
+        }
+
+        body.dark-mode #theme-toggle:hover {
+            background: var(--card-surface);
+            color: var(--accent);
+        }
+
+        body.dark-mode .detail-card, 
+        body.dark-mode .timeline-step,
+        body.dark-mode .roles-section,
+        body.dark-mode .schedule-section,
+        body.dark-mode .navbar {
+            background: var(--card-surface);
+            border-color: #374151;
+        }
+
+        body.dark-mode .month-container {
+            background: var(--card-surface);
+        }
+        body.dark-mode .month-header { background: var(--bg-body); color: white; border-color: #374151; }
+        body.dark-mode .days-grid { background: #374151; }
+        body.dark-mode .day-header {
+            background: var(--card-surface);
+        }
+        body.dark-mode .day-cell {
+            background: var(--card-surface);
+        }
+
+        body.dark-mode .day-cell.other-month { background: var(--bg-body); color: #4b5563; }
+        body.dark-mode .date-num { color: white; }
+        body.dark-mode .legend-item { color: #d1d5db; }
+        
+        body.dark-mode .calendar-nav-btn {
+            border-color: #4b5563;
+            color: #9ca3af;
+        }
+
+        body.dark-mode .calendar-nav-btn:hover {
+            background: #374151;
+            color: white;
+        }
+
+        body.dark-mode .process-section {
+            background: var(--bg-body);
+        }
+        
+        body.dark-mode .logo-text, 
+        body.dark-mode .hero-title,
+        body.dark-mode .section-header h2,
+        body.dark-mode .detail-card h3,
+        body.dark-mode .role-title,
+        body.dark-mode .timeline-step h4 {
+            color: white;
+        }\n\n/* FAQ Accordion Styles */\n.faq-item {\n    cursor: pointer;\n}\n.faq-answer {\n    max-height: 0;\n    overflow: hidden;\n    transition: max-height 0.3s ease-out, margin-top 0.3s ease;\n    margin-top: 0;\n    color: var(--text-muted);\n    font-size: 0.95rem;\n}\n.faq-item.active .faq-answer {\n    max-height: 500px;\n    margin-top: 10px;\n}\n.faq-question-container {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n}\n.faq-question-container h4 {\n    margin: 0;\n    font-size: 1.1rem;\n    color: var(--text-main);\n}\n.faq-toggle-icon {\n    transition: transform 0.3s ease;\n    color: var(--accent);\n}\n.faq-item.active .faq-toggle-icon {\n    transform: rotate(180deg);\n}
