@@ -114,4 +114,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Initial render
             renderCalendar();
+
+            // Set default dark mode if no preference saved
+            const currentTheme = localStorage.getItem('theme');
+            if (!currentTheme) {
+                document.body.classList.add('dark-mode');
+                const tIcon = document.querySelector('#theme-toggle i');
+                if(tIcon) {
+                    tIcon.classList.remove('fa-moon');
+                    tIcon.classList.add('fa-sun');
+                }
+                localStorage.setItem('theme', 'dark');
+            }
+
+            // FAQ Accordion Logic
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                   const item = question.parentElement;
+                   const answer = item.querySelector('.faq-answer');
+                   const icon = question.querySelector('.faq-toggle-icon');
+
+                   // Toggle active state
+                   item.classList.toggle('active');
+
+                   if (item.classList.contains('active')) {
+                       // Expand
+                       answer.style.maxHeight = answer.scrollHeight + 'px';
+                       if(icon) {
+                           icon.classList.remove('fa-plus');
+                           icon.classList.add('fa-minus');
+                       }
+                   } else {
+                       // Collapse
+                       answer.style.maxHeight = 0;
+                       if(icon) {
+                           icon.classList.remove('fa-minus');
+                           icon.classList.add('fa-plus');
+                       }
+                   }
+                });
+            });
         });

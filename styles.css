@@ -899,9 +899,9 @@ body.dark-mode .perk-item {
     margin-bottom: 0;
 }
 
-.preview-block.reverse {
+/* .preview-block.reverse {
     flex-direction: row-reverse;
-}
+} */
 
 .preview-text {
     flex: 1;
