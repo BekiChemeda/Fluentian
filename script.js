@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Form Submission & Google Sheets
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbwIrh9zPdgZ3T_9EVcOEikkuWH6hTAs6gPcplgxV0MQNo53i5BDu8dHaxgLlPFNCBQM/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyJYNkfJWImAlyRY8pKCpf2ffb1sUBQGPBPy-cAuGbCbYx5z2Gjq7yF9N4AIbrhyCxk/exec';
     const forms = document.querySelectorAll("#hero-waitlist, form[name='submit-to-google-sheet']"); 
 
     // Modals
