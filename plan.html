@@ -1,308 +1,370 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fluentian Pricing Plans</title>
     <link rel="stylesheet" href="/styles.css">
     <style>
+                .info-icon {
+                    display: inline-block;
+                    margin-left: 6px;
+                    color: #64748b;
+                    font-size: 1rem;
+                    cursor: pointer;
+                    vertical-align: middle;
+                    position: relative;
+                }
+                .info-tooltip {
+                    visibility: hidden;
+                    opacity: 0;
+                    width: 260px;
+                    background: #1e293b;
+                    color: #fff;
+                    text-align: left;
+                    border-radius: 8px;
+                    padding: 10px 14px;
+                    position: absolute;
+                    z-index: 10;
+                    left: 50%;
+                    top: 120%;
+                    transform: translateX(-50%);
+                    font-size: 0.97rem;
+                    box-shadow: 0 2px 12px rgba(0,0,0,0.13);
+                    transition: opacity 0.2s;
+                    pointer-events: none;
+                }
+                .info-icon:hover .info-tooltip,
+                .info-icon:focus .info-tooltip {
+                    visibility: visible;
+                    opacity: 1;
+                    pointer-events: auto;
+                }
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
-            background: #f8f9fb;
+            background: linear-gradient(120deg, #f8fafc 0%, #e0e7ff 100%);
             margin: 0;
             padding: 0;
         }
         .plans-container {
-            max-width: 1100px;
-            margin: 40px auto;
-            padding: 24px;
+            max-width: 1200px;
+            margin: 48px auto 0 auto;
+            padding: 32px 16px 16px 16px;
         }
         .plans-title {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: #1e293b;
+            letter-spacing: -1px;
+        }
+        .plans-subtitle {
+            text-align: center;
+            font-size: 1.25rem;
+            color: #475569;
+            margin-bottom: 36px;
+        }
+        .pricing-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        .pricing-table th, .pricing-table td {
+            padding: 18px 12px;
+            text-align: center;
+            font-size: 1.08rem;
+        }
+        .pricing-table th {
+            background: #f1f5f9;
+            color: #1e293b;
+            font-size: 1.15rem;
             font-weight: 700;
-            margin-bottom: 16px;
-            color: #2d3748;
         }
-        .plans-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 32px;
-            justify-content: center;
+        .pricing-table td {
+            color: #334155;
+            border-bottom: 1px solid #e5e7eb;
         }
-        .plan-card {
+        .plan-header {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2563eb;
+        }
+        .plan-header.pro {
+            color: #10b981;
+        }
+        .plan-header.proplus {
+            color: #f59e42;
+        }
+        .plan-price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 2px;
+        }
+        .plan-price-etb {
+            font-size: 1.05rem;
+            color: #64748b;
+            font-weight: 600;
+        }
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.98rem;
+            font-weight: 600;
+            background: #e0e7ff;
+            color: #3730a3;
+        }
+        .badge.unlimited {
+            background: #d1fae5;
+            color: #047857;
+        }
+        .badge.limited {
+            background: #fef9c3;
+            color: #b45309;
+        }
+        .badge.pro {
+            background: #bbf7d0;
+            color: #065f46;
+        }
+        .badge.proplus {
+            background: #fde68a;
+            color: #b45309;
+        }
+        .feature-title {
+            text-align: left;
+            font-weight: 600;
+            color: #334155;
+        }
+        .feature-desc {
+            font-size: 0.97rem;
+            color: #64748b;
+            margin-top: 2px;
+        }
+        @media (max-width: 900px) {
+            .pricing-table th, .pricing-table td {
+                padding: 12px 4px;
+                font-size: 0.98rem;
+            }
+        }
+        .addon-section {
+            margin: 48px auto 0 auto;
+            max-width: 800px;
             background: #fff;
             border-radius: 16px;
             box-shadow: 0 2px 16px rgba(0,0,0,0.07);
-            flex: 1 1 320px;
-            max-width: 340px;
-            min-width: 280px;
             padding: 32px 24px 28px 24px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            transition: transform 0.2s;
         }
-        .plan-card:hover {
-            transform: translateY(-6px) scale(1.03);
-            box-shadow: 0 6px 32px rgba(0,0,0,0.12);
-        }
-        .plan-name {
-            font-size: 1.5rem;
+        .addon-title {
+            font-size: 1.3rem;
             font-weight: 700;
-            margin-bottom: 10px;
             color: #2563eb;
+            margin-bottom: 12px;
         }
-        .plan-name.pro {
+        .addon-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 12px;
+        }
+        .addon-table th, .addon-table td {
+            border: 1px solid #e5e7eb;
+            padding: 10px 8px;
+            text-align: center;
+        }
+        .addon-table th {
+            background: #f3f4f6;
+            font-weight: 600;
+        }
+        .addon-note {
+            color: #6b7280;
+            font-size: 0.97rem;
+            margin-top: 8px;
+        }
+        .price-tag {
+            font-weight: 700;
             color: #10b981;
         }
-        .plan-name.proplus {
+        .price-tag.proplus {
             color: #f59e42;
         }
-        .plan-section {
-            margin-bottom: 18px;
-        }
-        .plan-section-title {
-            font-weight: 600;
-            margin-bottom: 6px;
-            color: #374151;
-        }
-        .plan-features {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .plan-features li {
-            margin-bottom: 6px;
-            color: #4b5563;
-            font-size: 1rem;
-        }
-        @media (max-width: 900px) {
-            .plans-grid {
-                flex-direction: column;
-                align-items: center;
-            }
+        .price-tag.etb {
+            color: #2563eb;
         }
     </style>
 </head>
 <body>
     <div class="plans-container">
         <div class="plans-title">Fluentian Pricing Plans</div>
-        <div class="plans-grid">
-            <!-- FREE PLAN -->
-            <div class="plan-card">
-                <div class="plan-name">FREE PLAN</div>
-                <div class="plan-section">
-                    <div class="plan-section-title">Daily learning:</div>
-                    <ul class="plan-features">
-                        <li>Unlimited daily lessons</li>
-                    </ul>
-                </div>
-                <div class="plan-section">
-                    <div class="plan-section-title">AI chat practice:</div>
-                    <ul class="plan-features">
-                        <li>Limited messages per day</li>
-                    </ul>
-                </div>
-                <div class="plan-section">
-                    <div class="plan-section-title">Chat corrections:</div>
-                    <ul class="plan-features">
-                        <li>Limited suggestions only</li>
-                    </ul>
-                </div>
-                <div class="plan-section">
-                    <div class="plan-section-title">Community system:</div>
-                    <ul class="plan-features">
-                        <li>Community text matching (limited units)</li>
-                        <li>Community voice calls: 5 minutes total per day</li>
-                        <li>Maximum 3 minutes per session</li>
-                    </ul>
-                </div>
-                <div class="plan-section">
-                    <div class="plan-section-title">AI voice practice:</div>
-                    <ul class="plan-features">
-                        <li>3 minutes once per day</li>
-                    </ul>
-                </div>
-                <div class="plan-section">
-                    <div class="plan-section-title">Pronunciation analysis:</div>
-                    <ul class="plan-features">
-                        <li>1 analyzed session per day</li>
-                        <li>Basic analysis</li>
-                        <li>Slow processing speed</li>
-                    </ul>
-                </div>
-                <div class="plan-section">
-                    <div class="plan-section-title">Offline access:</div>
-                    <ul class="plan-features">
-                        <li>Included</li>
-                    </ul>
-                </div>
-                <div class="plan-section">
-                    <div class="plan-section-title">Tutor scheduling:</div>
-                    <ul class="plan-features">
-                        <li>Available</li>
-                        <li>Minimum waiting time: 3+ days</li>
-                    </ul>
-                </div>
-                <div class="plan-section">
-                    <div class="plan-section-title">DELF exam scheduling:</div>
-                    <ul class="plan-features">
-                        <li>Available</li>
-                        <li>Minimum waiting time: 3+ days</li>
-                    </ul>
-                </div>
-                <div class="plan-section">
-                    <div class="plan-section-title">Opportunity board:</div>
-                    <ul class="plan-features">
-                        <li>Access only (no guidance)</li>
-                    </ul>
-                </div>
-            </div>
-            <!-- PRO PLAN -->
-            <div class="plan-card">
-                <div class="plan-name pro">PRO PLAN</div>
-                <div class="plan-section">
-                    <div class="plan-section-title">Daily learning:</div>
-                    <ul class="plan-features">
-                        <li>Unlimited daily lessons</li>
-                    </ul>
-                </div>
-                <div class="plan-section">
-                    <div class="plan-section-title">AI chat practice:</div>
-                    <ul class="plan-features">
-                        <li>High usage limit (approx. 500–2000 messages/day)</li>
-                        <li>Full corrections and advanced suggestions</li>
-                    </ul>
-                </div>
-                <div class="plan-section">
-                    <div class="plan-section-title">Chat corrections:</div>
-                    <ul class="plan-features">
-                        <li>Full grammar correction</li>
-                        <li>Advanced rewriting suggestions</li>
-                    </ul>
-                </div>
-                <div class="plan-section">
-                    <div class="plan-section-title">Community system:</div>
-                    <ul class="plan-features">
-                        <li>High-limit text matching</li>
-                        <li>Community voice calls: 30–60 minutes per day</li>
-                        <li>No session time restriction</li>
-                    </ul>
-                </div>
-                <div class="plan-section">
-                    <div class="plan-section-title">AI voice practice:</div>
-                    <ul class="plan-features">
-                        <li>25 minutes per day</li>
-                    </ul>
-                </div>
-                <div class="plan-section">
-                    <div class="plan-section-title">Pronunciation analysis:</div>
-                    <ul class="plan-features">
-                        <li>Up to 10 analyzed sessions per day</li>
-                        <li>Faster processing than Free tier</li>
-                        <li>Improved accuracy feedback</li>
-                    </ul>
-                </div>
-                <div class="plan-section">
-                    <div class="plan-section-title">Offline access:</div>
-                    <ul class="plan-features">
-                        <li>Included + full downloads</li>
-                    </ul>
-                </div>
-                <div class="plan-section">
-                    <div class="plan-section-title">Tutor scheduling:</div>
-                    <ul class="plan-features">
-                        <li>Available</li>
-                        <li>Faster booking (24–48 hours)</li>
-                    </ul>
-                </div>
-                <div class="plan-section">
-                    <div class="plan-section-title">DELF exam scheduling:</div>
-                    <ul class="plan-features">
-                        <li>Available</li>
-                        <li>Faster booking (24–48 hours)</li>
-                    </ul>
-                </div>
-                <div class="plan-section">
-                    <div class="plan-section-title">Opportunity board:</div>
-                    <ul class="plan-features">
-                        <li>Access only (no guidance)</li>
-                    </ul>
-                </div>
-            </div>
-            <!-- PRO PLUS PLAN -->
-            <div class="plan-card">
-                <div class="plan-name proplus">PRO PLUS PLAN</div>
-                <div class="plan-section">
-                    <div class="plan-section-title">Daily learning:</div>
-                    <ul class="plan-features">
-                        <li>Unlimited daily lessons</li>
-                    </ul>
-                </div>
-                <div class="plan-section">
-                    <div class="plan-section-title">AI chat practice:</div>
-                    <ul class="plan-features">
-                        <li>Unlimited</li>
-                    </ul>
-                </div>
-                <div class="plan-section">
-                    <div class="plan-section-title">Chat corrections:</div>
-                    <ul class="plan-features">
-                        <li>Advanced + highest-quality corrections</li>
-                    </ul>
-                </div>
-                <div class="plan-section">
-                    <div class="plan-section-title">Community system:</div>
-                    <ul class="plan-features">
-                        <li>Unlimited text matching</li>
-                        <li>Unlimited voice calls</li>
-                    </ul>
-                </div>
-                <div class="plan-section">
-                    <div class="plan-section-title">AI voice practice:</div>
-                    <ul class="plan-features">
-                        <li>Unlimited</li>
-                    </ul>
-                </div>
-                <div class="plan-section">
-                    <div class="plan-section-title">Pronunciation analysis:</div>
-                    <ul class="plan-features">
-                        <li>Unlimited analyzed sessions</li>
-                        <li>Fastest processing speed</li>
-                        <li>Real-time or near real-time feedback</li>
-                    </ul>
-                </div>
-                <div class="plan-section">
-                    <div class="plan-section-title">Offline access:</div>
-                    <ul class="plan-features">
-                        <li>Included + premium content packs</li>
-                    </ul>
-                </div>
-                <div class="plan-section">
-                    <div class="plan-section-title">Tutor scheduling:</div>
-                    <ul class="plan-features">
-                        <li>Priority access</li>
-                        <li>Same-day or instant booking</li>
-                    </ul>
-                </div>
-                <div class="plan-section">
-                    <div class="plan-section-title">DELF exam scheduling:</div>
-                    <ul class="plan-features">
-                        <li>Priority access</li>
-                        <li>Instant or fastest available scheduling</li>
-                    </ul>
-                </div>
-                <div class="plan-section">
-                    <div class="plan-section-title">Opportunity board:</div>
-                    <ul class="plan-features">
-                        <li>Access included</li>
-                        <li>Personalized guidance and recommendations</li>
-                        <li>Career + learning path suggestions based on user profile</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        <div class="plans-subtitle">Choose the plan that fits your learning journey. All plans include offline access and opportunity board access.</div>
+        <table class="pricing-table">
+            <tr>
+                <th class="feature-title"></th>
+                <th>
+                    <div class="plan-header">FREE
+                        <span class="info-icon" tabindex="0">
+                            <i class="fa-solid fa-circle-info"></i>
+                            <span class="info-tooltip">No cost. Basic access to all core features with limited usage and slower processing.</span>
+                        </span>
+                    </div>
+                    <div class="plan-price">$0</div>
+                    <div class="plan-price-etb">ETB 0</div>
+                </th>
+                <th>
+                    <div class="plan-header pro">PRO
+                        <span class="info-icon" tabindex="0">
+                            <i class="fa-solid fa-circle-info"></i>
+                            <span class="info-tooltip">Paid plan with higher usage limits, faster processing, and advanced corrections.</span>
+                        </span>
+                    </div>
+                    <div class="plan-price">$5/mo</div>
+                    <div class="plan-price-etb">ETB 780/mo</div>
+                </th>
+                <th>
+                    <div class="plan-header proplus">PRO PLUS
+                        <span class="info-icon" tabindex="0">
+                            <i class="fa-solid fa-circle-info"></i>
+                            <span class="info-tooltip">Top-tier plan with unlimited usage, fastest processing, and premium features.</span>
+                        </span>
+                    </div>
+                    <div class="plan-price">$7.5/mo</div>
+                    <div class="plan-price-etb">ETB 1170/mo</div>
+                </th>
+            </tr>
+            <tr>
+                <td class="feature-title">Daily learning
+                    <span class="info-icon" tabindex="0">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span class="info-tooltip">Number of language lessons you can complete each day.</span>
+                    </span><br>
+                    <span class="feature-desc">Lessons per day</span>
+                </td>
+                <td><span class="badge unlimited">Unlimited</span></td>
+                <td><span class="badge unlimited">Unlimited</span></td>
+                <td><span class="badge unlimited">Unlimited</span></td>
+            </tr>
+            <tr>
+                <td class="feature-title">AI chat practice
+                    <span class="info-icon" tabindex="0">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span class="info-tooltip">Converse with Fluentian's AI for language practice. Limit is messages you can send per day.</span>
+                    </span><br>
+                    <span class="feature-desc">Messages per day</span>
+                </td>
+                <td><span class="badge limited">Limited</span></td>
+                <td><span class="badge">500–2000</span></td>
+                <td><span class="badge unlimited">Unlimited</span></td>
+            </tr>
+            <tr>
+                <td class="feature-title">Chat corrections
+                    <span class="info-icon" tabindex="0">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span class="info-tooltip">AI-powered grammar correction and rewriting suggestions for your chat messages.</span>
+                    </span><br>
+                    <span class="feature-desc">Suggestions & rewriting</span>
+                </td>
+                <td><span class="badge limited">Limited</span></td>
+                <td><span class="badge">Full & advanced</span></td>
+                <td><span class="badge proplus">Highest quality</span></td>
+            </tr>
+            <tr>
+                <td class="feature-title">Community text matching
+                    <span class="info-icon" tabindex="0">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span class="info-tooltip">Connect with other learners for text-based language exchange and practice.</span>
+                    </span>
+                </td>
+                <td><span class="badge limited">Limited</span></td>
+                <td><span class="badge">High-limit</span></td>
+                <td><span class="badge unlimited">Unlimited</span></td>
+            </tr>
+            <tr>
+                <td class="feature-title">Community voice calls
+                    <span class="info-icon" tabindex="0">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span class="info-tooltip">Practice speaking with other users via voice calls. Limit is total minutes per day.</span>
+                    </span><br>
+                    <span class="feature-desc">Total minutes per day</span>
+                </td>
+                <td><span class="badge">5 min<br>Max 3 min/session</span></td>
+                <td><span class="badge">30–60 min<br>No session limit</span></td>
+                <td><span class="badge unlimited">Unlimited</span></td>
+            </tr>
+            <tr>
+                <td class="feature-title">AI voice practice
+                    <span class="info-icon" tabindex="0">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span class="info-tooltip">Speak with the AI to practice pronunciation and fluency. Limit is minutes per day.</span>
+                    </span><br>
+                    <span class="feature-desc">Minutes per day</span>
+                </td>
+                <td><span class="badge">3 min</span></td>
+                <td><span class="badge">25 min</span></td>
+                <td><span class="badge unlimited">Unlimited</span></td>
+            </tr>
+            <tr>
+                <td class="feature-title">Pronunciation analysis
+                    <span class="info-icon" tabindex="0">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span class="info-tooltip">AI analyzes your pronunciation and gives feedback. Limit is sessions per day and processing speed.</span>
+                    </span><br>
+                    <span class="feature-desc">Sessions per day</span>
+                </td>
+                <td><span class="badge">1<br>Basic, slow</span></td>
+                <td><span class="badge">10<br>Faster, improved</span></td>
+                <td><span class="badge unlimited">Unlimited<br>Fastest, real-time</span></td>
+            </tr>
+            <tr>
+                <td class="feature-title">Offline access
+                    <span class="info-icon" tabindex="0">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span class="info-tooltip">Access lessons and features without an internet connection.</span>
+                    </span>
+                </td>
+                <td><span class="badge">Included</span></td>
+                <td><span class="badge">Full downloads</span></td>
+                <td><span class="badge proplus">Premium packs</span></td>
+            </tr>
+            <tr>
+                <td class="feature-title">Tutor scheduling
+                    <span class="info-icon" tabindex="0">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span class="info-tooltip">Book sessions with a human tutor. Shows minimum waiting time for booking.</span>
+                    </span><br>
+                    <span class="feature-desc">Booking speed</span>
+                </td>
+                <td><span class="badge">3+ days</span></td>
+                <td><span class="badge">24–48 hrs</span></td>
+                <td><span class="badge proplus">Same-day/Instant</span></td>
+            </tr>
+            <tr>
+                <td class="feature-title">DELF exam scheduling
+                    <span class="info-icon" tabindex="0">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span class="info-tooltip">Book your DELF exam slot through Fluentian. Shows minimum waiting time for scheduling.</span>
+                    </span><br>
+                    <span class="feature-desc">Booking speed</span>
+                </td>
+                <td><span class="badge">3+ days</span></td>
+                <td><span class="badge">24–48 hrs</span></td>
+                <td><span class="badge proplus">Instant/Fastest</span></td>
+            </tr>
+            <tr>
+                <td class="feature-title">Opportunity board
+                    <span class="info-icon" tabindex="0">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span class="info-tooltip">Browse job, internship, and learning opportunities. Pro Plus includes personalized guidance.</span>
+                    </span>
+                </td>
+                <td><span class="badge">Access only</span></td>
+                <td><span class="badge">Access only</span></td>
+                <td><span class="badge proplus">Personalized guidance</span></td>
+            </tr>
+        </table>
         <!-- Add-on Packages Section -->
         <div class="addon-section">
             <div class="addon-title">Community Voice Call Add-on Packages (No Subscription Required)</div>
