@@ -40,9 +40,9 @@
             <div class="toggles-container">
                 <!-- Currency Toggle -->
                 <div class="currency-toggle" id="currency-toggle">
-                    <button class="currency-btn active" data-currency="usd">USD</button>
+                    <button class="currency-btn active" data-currency="etb">ETB</button>
+                    <button class="currency-btn" data-currency="usd">USD</button>
                     <button class="currency-btn" data-currency="eur">EUR</button>
-                    <button class="currency-btn" data-currency="etb">ETB</button>
                 </div>
 
                 <!-- Billing Toggle -->
@@ -324,7 +324,7 @@
         const body = document.body;
 
         let currentBilling = 'yearly';
-        let currentCurrency = 'usd';
+        let currentCurrency = 'etb';
 
         // Initialize state
         body.setAttribute('data-currency', currentCurrency);
