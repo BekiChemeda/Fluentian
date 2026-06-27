@@ -338,8 +338,10 @@ body.dark-mode .pass-item {
 }
 
 .pass-item.highlight,
-.pass-item.highlight span,
-.pass-item.highlight strong {
+.pass-item.highlight *,
+.pass-item.highlight span.usd-only,
+.pass-item.highlight span.eur-only,
+.pass-item.highlight span.etb-only {
     color: #ffffff !important;
 }
 
