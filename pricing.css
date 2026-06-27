@@ -72,8 +72,9 @@ body.dark-mode .currency-toggle, body.dark-mode .billing-toggle {
 }
 
 /* Currency Display Logic */
-body[data-currency="usd"] .etb-only { display: none !important; }
-body[data-currency="etb"] .usd-only { display: none !important; }
+body[data-currency="usd"] .etb-only, body[data-currency="usd"] .eur-only { display: none !important; }
+body[data-currency="etb"] .usd-only, body[data-currency="etb"] .eur-only { display: none !important; }
+body[data-currency="eur"] .usd-only, body[data-currency="eur"] .etb-only { display: none !important; }
 
 body[data-billing="monthly"] .yearly-only { display: none !important; }
 
@@ -331,13 +332,21 @@ body.dark-mode .pass-item {
 }
 
 .pass-item.highlight {
-    background: rgba(79, 70, 229, 0.1);
+    background: linear-gradient(135deg, var(--primary), #6366F1);
     border: 1px solid var(--primary);
-    color: var(--primary);
+    box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
+}
+
+.pass-item.highlight,
+.pass-item.highlight span,
+.pass-item.highlight strong {
+    color: #ffffff !important;
 }
 
 body.dark-mode .pass-item.highlight {
-    background: rgba(79, 70, 229, 0.2);
+    background: linear-gradient(135deg, var(--primary), #6366F1);
+    color: white;
+    border-color: transparent;
 }
 
 /* Comparison Table */
@@ -468,3 +477,58 @@ body.dark-mode .faq-card {
 }
 
 .text-center { text-align: center; }
+
+/* Tooltips for Features */
+.info-icon {
+    display: inline-block;
+    margin-left: 6px;
+    color: var(--gray);
+    font-size: 0.9rem;
+    cursor: help;
+    position: relative;
+    vertical-align: middle;
+}
+.info-tooltip {
+    visibility: hidden;
+    opacity: 0;
+    width: 240px;
+    background: var(--dark);
+    color: #fff;
+    text-align: left;
+    border-radius: 8px;
+    padding: 10px 14px;
+    position: absolute;
+    z-index: 50;
+    bottom: 150%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    font-size: 0.85rem;
+    font-weight: 400;
+    line-height: 1.4;
+    box-shadow: var(--shadow-lg);
+    transition: all 0.2s ease;
+    pointer-events: none;
+}
+.info-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -6px;
+    border-width: 6px;
+    border-style: solid;
+    border-color: var(--dark) transparent transparent transparent;
+}
+.info-icon:hover .info-tooltip,
+.info-icon:focus .info-tooltip {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+body.dark-mode .info-tooltip {
+    background: #fff;
+    color: var(--dark);
+}
+body.dark-mode .info-tooltip::after {
+    border-color: #fff transparent transparent transparent;
+}

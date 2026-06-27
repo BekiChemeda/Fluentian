@@ -10,8 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="pricing.css">
+    <link rel="stylesheet" href="styles.css?v=2">
+    <link rel="stylesheet" href="pricing.css?v=2">
 </head>
 <body>
     <!-- Navbar -->
@@ -37,6 +37,7 @@
                 <!-- Currency Toggle -->
                 <div class="currency-toggle" id="currency-toggle">
                     <button class="currency-btn active" data-currency="usd">USD</button>
+                    <button class="currency-btn" data-currency="eur">EUR</button>
                     <button class="currency-btn" data-currency="etb">ETB</button>
                 </div>
                 
@@ -57,8 +58,9 @@
                         <h3>Starter</h3>
                         <div class="price-display">
                             <span class="currency-symbol usd-only">$</span>
+                            <span class="currency-symbol eur-only">€</span>
                             <span class="currency-symbol etb-only">ETB</span>
-                            <span class="amount" data-usd-monthly="0" data-usd-yearly="0" data-etb-monthly="0" data-etb-yearly="0">0</span>
+                            <span class="amount" data-usd-monthly="0" data-usd-yearly="0" data-eur-monthly="0" data-eur-yearly="0" data-etb-monthly="0" data-etb-yearly="0">0</span>
                             <span class="period">/mo</span>
                         </div>
                         <p class="card-desc">Basic access to core features for casual learners.</p>
@@ -79,11 +81,13 @@
                         <h3>Pro</h3>
                         <div class="price-display">
                             <span class="currency-symbol usd-only">$</span>
+                            <span class="currency-symbol eur-only">€</span>
                             <span class="currency-symbol etb-only">ETB</span>
-                            <span class="amount" data-usd-monthly="5" data-usd-yearly="4.50" data-etb-monthly="780" data-etb-yearly="702">4.50</span>
+                            <span class="amount" data-usd-monthly="5" data-usd-yearly="4.50" data-eur-monthly="4.50" data-eur-yearly="3.90" data-etb-monthly="780" data-etb-yearly="702">4.50</span>
                             <span class="period">/mo</span>
                         </div>
                         <p class="yearly-billed yearly-only usd-only">Billed $54 yearly</p>
+                        <p class="yearly-billed yearly-only eur-only">Billed €47 yearly</p>
                         <p class="yearly-billed yearly-only etb-only">Billed ETB 8,424 yearly</p>
                         <p class="card-desc">Accelerate your fluency with advanced AI and community access.</p>
                     </div>
@@ -103,11 +107,13 @@
                         <h3>Pro Plus</h3>
                         <div class="price-display">
                             <span class="currency-symbol usd-only">$</span>
+                            <span class="currency-symbol eur-only">€</span>
                             <span class="currency-symbol etb-only">ETB</span>
-                            <span class="amount" data-usd-monthly="7.50" data-usd-yearly="6.75" data-etb-monthly="1170" data-etb-yearly="1053">6.75</span>
+                            <span class="amount" data-usd-monthly="7.50" data-usd-yearly="6.75" data-eur-monthly="6.50" data-eur-yearly="5.80" data-etb-monthly="1170" data-etb-yearly="1053">6.75</span>
                             <span class="period">/mo</span>
                         </div>
                         <p class="yearly-billed yearly-only usd-only">Billed $81 yearly</p>
+                        <p class="yearly-billed yearly-only eur-only">Billed €70 yearly</p>
                         <p class="yearly-billed yearly-only etb-only">Billed ETB 12,636 yearly</p>
                         <p class="card-desc">The ultimate package with limitless usage and premium support.</p>
                     </div>
@@ -137,7 +143,7 @@
                         <h3>1-on-1 Tutors & Mock Exams</h3>
                         <p>Private sessions with certified French teachers. Perfect for interview prep or DELF practice.</p>
                         <div class="addon-price">
-                            Starting at <span class="usd-only">$3.20</span><span class="etb-only">ETB 500</span> / session
+                            Starting at <span class="usd-only">$3.20</span><span class="eur-only">€2.80</span><span class="etb-only">ETB 500</span> / session
                         </div>
                         <ul class="addon-features">
                             <li><i class="fas fa-arrow-right"></i> Browse and pick by specialty</li>
@@ -153,15 +159,15 @@
                         <div class="pass-options">
                             <div class="pass-item">
                                 <span>1 Day (1 hr)</span>
-                                <strong><span class="usd-only">$0.50</span><span class="etb-only">ETB 78</span></strong>
+                                <strong><span class="usd-only">$0.50</span><span class="eur-only">€0.45</span><span class="etb-only">ETB 78</span></strong>
                             </div>
                             <div class="pass-item highlight">
                                 <span>1 Week (5 hrs)</span>
-                                <strong><span class="usd-only">$2.00</span><span class="etb-only">ETB 312</span></strong>
+                                <strong><span class="usd-only">$2.00</span><span class="eur-only">€1.75</span><span class="etb-only">ETB 312</span></strong>
                             </div>
                             <div class="pass-item">
                                 <span>1 Month (20 hrs)</span>
-                                <strong><span class="usd-only">$8.00</span><span class="etb-only">ETB 1,248</span></strong>
+                                <strong><span class="usd-only">$8.00</span><span class="eur-only">€7.00</span><span class="etb-only">ETB 1,248</span></strong>
                             </div>
                         </div>
                     </div>
@@ -187,49 +193,65 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Daily learning lessons</td>
+                            <td>Daily learning lessons
+                                <span class="info-icon" tabindex="0"><i class="fa-solid fa-circle-info"></i><span class="info-tooltip">The number of structured language lessons you can complete each day.</span></span>
+                            </td>
                             <td>Unlimited</td>
                             <td>Unlimited</td>
                             <td>Unlimited</td>
                         </tr>
                         <tr>
-                            <td>24/7 AI Conversation Partner</td>
+                            <td>24/7 AI Conversation Partner
+                                <span class="info-icon" tabindex="0"><i class="fa-solid fa-circle-info"></i><span class="info-tooltip">Converse with Fluentian's AI to practice language scenarios.</span></span>
+                            </td>
                             <td>Limited</td>
                             <td>500–2000 msgs</td>
                             <td>Unlimited</td>
                         </tr>
                         <tr>
-                            <td>AI Grammar Corrections</td>
+                            <td>AI Grammar Corrections
+                                <span class="info-icon" tabindex="0"><i class="fa-solid fa-circle-info"></i><span class="info-tooltip">AI-powered grammar correction and rewriting suggestions for your chat messages.</span></span>
+                            </td>
                             <td>Limited</td>
                             <td>Full & advanced</td>
                             <td>Highest quality</td>
                         </tr>
                         <tr>
-                            <td>Global Language Exchange</td>
+                            <td>Global Language Exchange
+                                <span class="info-icon" tabindex="0"><i class="fa-solid fa-circle-info"></i><span class="info-tooltip">Connect and match with other learners worldwide for language exchange.</span></span>
+                            </td>
                             <td>Limited</td>
                             <td>High-limit</td>
                             <td>Unlimited</td>
                         </tr>
                         <tr>
-                            <td>Live Community Voice Calls</td>
+                            <td>Live Community Voice Calls
+                                <span class="info-icon" tabindex="0"><i class="fa-solid fa-circle-info"></i><span class="info-tooltip">Practice speaking with other users via live voice calls.</span></span>
+                            </td>
                             <td>5 min / day</td>
                             <td>30–60 min / day</td>
                             <td>Unlimited</td>
                         </tr>
                         <tr>
-                            <td>AI Voice Practice</td>
+                            <td>AI Voice Practice
+                                <span class="info-icon" tabindex="0"><i class="fa-solid fa-circle-info"></i><span class="info-tooltip">Speak with the AI to practice pronunciation and fluency in realistic scenarios.</span></span>
+                            </td>
                             <td>3 min / day</td>
                             <td>25 min / day</td>
                             <td>Unlimited</td>
                         </tr>
                         <tr>
-                            <td>Pronunciation Analysis</td>
+                            <td>Pronunciation Analysis
+                                <span class="info-icon" tabindex="0"><i class="fa-solid fa-circle-info"></i><span class="info-tooltip">AI analyzes your voice and provides targeted feedback on pronunciation.</span></span>
+                            </td>
                             <td>1 / day (Basic speed)</td>
                             <td>10 / day (Fast)</td>
                             <td>Unlimited (Real-time)</td>
                         </tr>
                         <tr>
-                            <td>Offline Access</td>
+                            <td>Offline Access
+                                <span class="info-icon" tabindex="0"><i class="fa-solid fa-circle-info"></i><span class="info-tooltip">Access your lessons and features without an active internet connection.</span></span>
+                            </td>
                             <td>Included</td>
                             <td>Full downloads</td>
                             <td>Premium packs</td>
